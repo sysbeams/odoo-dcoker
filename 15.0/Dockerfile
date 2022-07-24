@@ -55,6 +55,8 @@ RUN npm install -g rtlcss
 
 # Install Odoo
 COPY ${ODOO_PATH} .
+RUN pip install setuptools wheel
+RUN pip install -r requirements.txt
 #ENV ODOO_VERSION 15.0
 #ARG ODOO_RELEASE=20220718
 #ARG ODOO_SHA=dc4a5b8c5be8f873e751539117f5aa41d9f7b217
