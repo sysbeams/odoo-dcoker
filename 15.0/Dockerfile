@@ -54,14 +54,15 @@ RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main' > /et
 RUN npm install -g rtlcss
 
 # Install Odoo
-ENV ODOO_VERSION 15.0
-ARG ODOO_RELEASE=20220718
-ARG ODOO_SHA=dc4a5b8c5be8f873e751539117f5aa41d9f7b217
-RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
-    && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
-    && apt-get update \
-    && apt-get -y install --no-install-recommends ./odoo.deb \
-    && rm -rf /var/lib/apt/lists/* odoo.deb
+COPY ${ODOO_PATH} .
+#ENV ODOO_VERSION 15.0
+#ARG ODOO_RELEASE=20220718
+#ARG ODOO_SHA=dc4a5b8c5be8f873e751539117f5aa41d9f7b217
+#RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
+#    && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
+#    && apt-get update \
+#    && apt-get -y install --no-install-recommends ./odoo.deb \
+#    && rm -rf /var/lib/apt/lists/* odoo.deb
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
